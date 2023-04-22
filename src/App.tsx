@@ -1,11 +1,19 @@
 import { FunctionComponent } from 'react';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <h1>Hello World!</h1>
+  },
+  {
+    path: '/about',
+    element: <h1>about</h1>
+  }
+]);
 
 const App: FunctionComponent = () => {
-  return (
-    <main className="flex h-screen w-screen items-center justify-center bg-slate-900 text-white">
-      <h1>Hello World</h1>
-    </main>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;
