@@ -2,19 +2,17 @@ import { createContext, useState, FunctionComponent, useContext, PropsWithChildr
 
 interface AuthContextType {
   user: string;
-  signIn: (user: string, callback: VoidFunction) => void;
-  signOut: (callback: VoidFunction) => void;
+  signIn: (user: string) => void;
+  signOut: () => void;
 }
 
 const fakeAuthProvider = {
   isAuthenticated: false,
-  signIn(callback: VoidFunction) {
+  signIn() {
     fakeAuthProvider.isAuthenticated = true;
-    setTimeout(callback, 100);
   },
-  signOut(callback: VoidFunction) {
+  signOut() {
     fakeAuthProvider.isAuthenticated = false;
-    setTimeout(callback, 100);
   }
 };
 
@@ -23,18 +21,14 @@ const AuthContext = createContext<AuthContextType>(null as unknown as AuthContex
 export const AuthProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
   const [user, setUser] = useState<string>('');
 
-  const signIn = (newUser: string, callback: VoidFunction) => {
-    return fakeAuthProvider.signIn(() => {
-      setUser(newUser);
-      callback();
-    });
+  const signIn = (newUser: string) => {
+    setUser(newUser);
+    return fakeAuthProvider.signIn();
   };
 
-  const signOut = (callback: VoidFunction) => {
-    return fakeAuthProvider.signOut(() => {
-      setUser('');
-      callback();
-    });
+  const signOut = () => {
+    setUser('');
+    return fakeAuthProvider.signOut();
   };
 
   const value = useMemo(() => {
