@@ -1,5 +1,5 @@
 import { FunctionComponent, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { useAuthContext } from '@/contexts/Auth';
 
@@ -18,6 +18,9 @@ export const Private: FunctionComponent = () => {
         SignOut
       </button>
       <h3>Protected page</h3>
+      <Link to="/" className="rounded-md bg-blue-400 p-3">
+        Go to public page
+      </Link>
     </main>
   );
 };
