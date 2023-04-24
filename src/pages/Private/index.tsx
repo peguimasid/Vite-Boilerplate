@@ -13,11 +13,11 @@ export const Private: FunctionComponent = () => {
   }, [navigate, signOut]);
 
   return (
-    <main>
-      <button onClick={handleSignOut} className="bg-red-400">
+    <main className="flex h-screen w-screen flex-col items-center justify-center space-y-3 bg-slate-900 text-white">
+      <button onClick={handleSignOut} className="rounded-md bg-blue-400 p-3">
         SignOut
       </button>
-      <h3>Protected</h3>
+      <h3>Protected page</h3>
     </main>
   );
 };
