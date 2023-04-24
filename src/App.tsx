@@ -1,8 +1,27 @@
-import { useCallback } from 'react';
-import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
-import { useAuthContext } from './contexts/Auth';
+import './styles/index.css';
 
-export default function App() {
+import { FunctionComponent, ReactElement, useCallback } from 'react';
+import { BrowserRouter, Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuthContext } from './contexts/Auth';
+
+// router/guards/RequireAuth
+interface RequireAuthProps {
+  children: ReactElement;
+}
+
+const RequireAuth: FunctionComponent<RequireAuthProps> = ({ children }) => {
+  const auth = useAuthContext();
+  const location = useLocation();
+
+  if (!auth.user) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  return children;
+};
+
+// router/index
+const Router: FunctionComponent = () => {
   return (
     <Routes>
       <Route path="/" element={<PublicPage />} />
@@ -17,18 +36,7 @@ export default function App() {
       />
     </Routes>
   );
-}
-
-function RequireAuth({ children }: { children: JSX.Element }) {
-  const auth = useAuthContext();
-  const location = useLocation();
-
-  if (!auth.user) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
-  }
-
-  return children;
-}
+};
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -89,3 +97,15 @@ function ProtectedPage() {
     </main>
   );
 }
+
+const App: FunctionComponent = () => {
+  return (
+    <BrowserRouter>
+      <AuthProvider>
+        <Router />
+      </AuthProvider>
+    </BrowserRouter>
+  );
+};
+
+export default App;
