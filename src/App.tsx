@@ -6,12 +6,18 @@ import { AuthProvider } from './contexts/Auth';
 
 import { Router } from './router';
 
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { theme } from './theme';
+
 const App: FunctionComponent = () => {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <Router />
-      </AuthProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <AuthProvider>
+          <Router />
+        </AuthProvider>
+      </ThemeProvider>
     </BrowserRouter>
   );
 };

@@ -16,7 +16,7 @@ const fakeAuthProvider = {
   }
 };
 
-const AuthContext = createContext<AuthContextType>(null as unknown as AuthContextType);
+const AuthContext = createContext<AuthContextType>(null);
 
 export const AuthProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
   const [user, setUser] = useState<string>('');
