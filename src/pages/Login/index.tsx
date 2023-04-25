@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useAuthContext } from '@/contexts/Auth';
+import { Button, TextField, Typography } from '@mui/material';
 
 export const Login: FunctionComponent = () => {
   const navigate = useNavigate();
@@ -16,25 +17,21 @@ export const Login: FunctionComponent = () => {
     const formData = new FormData(event.currentTarget);
     const username = formData.get('username') as string;
 
+    if (!username) return;
+
     auth.signIn(username);
     navigate(from, { replace: true });
   }
 
   return (
     <main className="flex h-screen w-screen flex-col items-center justify-center space-y-3 bg-slate-900 text-white">
-      <p>You must log in to view the page at {from}</p>
+      <Typography variant="h6">You must log in to view the page at {from}</Typography>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-        <input
-          className="focus:shadow-outline w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow focus:outline-none"
-          id="username"
-          name="username"
-          type="text"
-          placeholder="Username"
-        />
-        <button type="submit" className="rounded-md bg-blue-400 p-3">
+        <TextField id="username" name="username" type="text" label="Username" variant="outlined" />
+        <Button type="submit" variant="contained" className="rounded-lg">
           Login
-        </button>
+        </Button>
       </form>
     </main>
   );

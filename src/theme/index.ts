@@ -3,6 +3,7 @@ import { blue, purple, red } from '@mui/material/colors';
 
 export const theme = createTheme({
   palette: {
+    mode: 'dark',
     primary: {
       main: blue[700]
     },

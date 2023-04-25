@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { useAuthContext } from '@/contexts/Auth';
 
+import { Button, Icon, Typography } from '@mui/material';
+
 export const Private: FunctionComponent = () => {
   const { signOut } = useAuthContext();
   const navigate = useNavigate();
@@ -14,13 +16,13 @@ export const Private: FunctionComponent = () => {
 
   return (
     <main className="flex h-screen w-screen flex-col items-center justify-center space-y-3 bg-slate-900 text-white">
-      <button onClick={handleSignOut} className="rounded-md bg-blue-400 p-3">
+      <Button onClick={handleSignOut} startIcon={<Icon>logout</Icon>} color="error" variant="contained">
         SignOut
-      </button>
-      <h3>Protected page</h3>
-      <Link to="/" className="rounded-md bg-blue-400 p-3">
+      </Button>
+      <Typography variant="h5">Protected page</Typography>
+      <Button component={Link} variant="contained" to="/" startIcon={<Icon>chevron_left</Icon>}>
         Go to public page
-      </Link>
+      </Button>
     </main>
   );
 };
