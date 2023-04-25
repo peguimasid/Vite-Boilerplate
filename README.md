@@ -44,6 +44,7 @@ This boilerplate includes the following features:
 - `prettier-plugin-tailwindcss` for consistent formatting of TailwindCSS classes
 - React Router DOM for routing (**NEW**)
 - JWT authentication handler to protect routes (**NEW**)
+- Material UI (**NEW**)
 
 ## Contributing
 
