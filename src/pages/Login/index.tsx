@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { useAuthContext } from '@/contexts/Auth';
+import { useAuthContext } from '@/contexts/AuthContext';
 import { Button, TextField, Typography } from '@mui/material';
 
 export const Login: FunctionComponent = () => {

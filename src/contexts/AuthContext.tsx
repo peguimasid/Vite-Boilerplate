@@ -1,34 +1,26 @@
 import { createContext, useState, FunctionComponent, useContext, PropsWithChildren, useMemo } from 'react';
 
+interface User {
+  name: string;
+}
+
 interface AuthContextType {
-  user: string;
-  signIn: (user: string) => void;
+  user: User | null;
+  signIn: (name: string) => void;
   signOut: () => void;
 }
 
-const fakeAuthProvider = {
-  isAuthenticated: false,
-  signIn() {
-    fakeAuthProvider.isAuthenticated = true;
-  },
-  signOut() {
-    fakeAuthProvider.isAuthenticated = false;
-  }
-};
-
-const AuthContext = createContext<AuthContextType>(null);
+const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 export const AuthProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
-  const [user, setUser] = useState<string>('');
+  const [user, setUser] = useState<User | null>(null);
 
-  const signIn = (newUser: string) => {
-    setUser(newUser);
-    return fakeAuthProvider.signIn();
+  const signIn = (name: string) => {
+    setUser({ name });
   };
 
   const signOut = () => {
-    setUser('');
-    return fakeAuthProvider.signOut();
+    setUser(null);
   };
 
   const value = useMemo(() => {

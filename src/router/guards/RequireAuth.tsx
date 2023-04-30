@@ -1,7 +1,7 @@
 import { FunctionComponent, ReactElement } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 
-import { useAuthContext } from '@/contexts/Auth';
+import { useAuthContext } from '@/contexts/AuthContext';
 
 interface RequireAuthProps {
   children: ReactElement;

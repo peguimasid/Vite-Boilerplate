@@ -1,12 +1,12 @@
 import { FunctionComponent, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { useAuthContext } from '@/contexts/Auth';
+import { useAuthContext } from '@/contexts/AuthContext';
 
 import { Button, Icon, Typography } from '@mui/material';
 
 export const Private: FunctionComponent = () => {
-  const { signOut } = useAuthContext();
+  const { user, signOut } = useAuthContext();
   const navigate = useNavigate();
 
   const handleSignOut = useCallback(() => {
@@ -19,7 +19,7 @@ export const Private: FunctionComponent = () => {
       <Button onClick={handleSignOut} startIcon={<Icon>logout</Icon>} color="error" variant="contained">
         SignOut
       </Button>
-      <Typography variant="h5">Protected page</Typography>
+      <Typography variant="h5">Hello, {user?.name}</Typography>
       <Button component={Link} variant="contained" to="/" startIcon={<Icon>chevron_left</Icon>}>
         Go to public page
       </Button>
